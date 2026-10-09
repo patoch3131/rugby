@@ -51,6 +51,8 @@ textarea{width:100%;min-height:150px;resize:vertical;padding:10px;border:1px sol
 .field{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);margin-top:10px}
 .msg{margin:10px 0 0;font-size:14px;color:var(--muted)}
 .msg.err{color:var(--danger)}
+.out{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:14px}
+.out textarea{min-height:120px;margin-top:8px;font:13px/1.35 ui-monospace,Menlo,Consolas,monospace}
 .pubbar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--flag);color:var(--on-flag);border-radius:10px;padding:10px 12px;margin-bottom:14px;font-weight:600}
 .pubbar .btn{background:var(--on-flag);color:var(--flag);border-color:var(--on-flag)}
 
@@ -94,9 +96,11 @@ li.p.sub .num{color:var(--muted)}
   <p class="sub">Qui joue à quel poste cette journée de Top 14.</p>
   <p class="updated" id="updated"></p>
 
-  <div class="pubbar" id="pubbar" hidden>
-    <span>Modifications non publiées</span>
-    <button class="btn" id="pub" type="button">Publier pour le groupe</button>
+  <div class="out" id="outbox" hidden>
+    <strong>Fichier compos.json à mettre sur GitHub</strong>
+    <textarea id="jsonout" readonly aria-label="Contenu du fichier compos.json"></textarea>
+    <div class="row"><button class="btn primary" id="copy" type="button">Copier</button></div>
+    <p class="msg">Sur GitHub : ouvre le fichier compos.json, touche le crayon, efface tout, colle, puis « Commit changes ». La page est à jour une minute plus tard.</p>
   </div>
 
   <details class="add" id="add" hidden>
@@ -129,140 +133,6 @@ li.p.sub .num{color:var(--muted)}
   <p class="note" id="note" hidden>Les remplaçants sont listés par numéro de maillot, sans poste : la feuille de match ne précise pas où ils entrent. Tes favoris et tes filtres sont personnels, enregistrés sur ton téléphone.</p>
 </main>
 
-<script type="application/json" id="seed">{"updated":"2026-10-03T10:54:25.938Z","players":[{"id":"BORDEAUX|1|PKHAKADZE","team":"BORDEAUX","num":1,"name":"PKHAKADZE","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BORDEAUX|2|LAMOTHE","team":"BORDEAUX","num":2,"name":"LAMOTHE","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BORDEAUX|3|FALATEA","team":"BORDEAUX","num":3,"name":"FALATEA","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BORDEAUX|4|PALU","team":"BORDEAUX","num":4,"name":"PALU","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BORDEAUX|5|CAZEAUX","team":"BORDEAUX","num":5,"name":"CAZEAUX","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BORDEAUX|6|MATIU","team":"BORDEAUX","num":6,"name":"MATIU","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BORDEAUX|7|WOKI","team":"BORDEAUX","num":7,"name":"WOKI","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BORDEAUX|8|WILLIS","team":"BORDEAUX","num":8,"name":"WILLIS","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BORDEAUX|9|LUCU","team":"BORDEAUX","num":9,"name":"LUCU","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BORDEAUX|10|REUS","team":"BORDEAUX","num":10,"name":"REUS","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BORDEAUX|11|BIELLE-BIARREY","team":"BORDEAUX","num":11,"name":"BIELLE-BIARREY","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BORDEAUX|12|MOEFANA","team":"BORDEAUX","num":12,"name":"MOEFANA","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BORDEAUX|13|DEPOORTÈRE","team":"BORDEAUX","num":13,"name":"DEPOORTÈRE","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BORDEAUX|14|RAYASI","team":"BORDEAUX","num":14,"name":"RAYASI","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BORDEAUX|15|BUROS","team":"BORDEAUX","num":15,"name":"BUROS","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BORDEAUX|16|C. SA","team":"BORDEAUX","num":16,"name":"C. SA","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"BORDEAUX|17|J. POIROT","team":"BORDEAUX","num":17,"name":"J. POIROT","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"BORDEAUX|18|T. TAUFA","team":"BORDEAUX","num":18,"name":"T. TAUFA","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"BORDEAUX|19|A. ZAPĘDOWSKI","team":"BORDEAUX","num":19,"name":"A. ZAPĘDOWSKI","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"BORDEAUX|20|T. JACOBS","team":"BORDEAUX","num":20,"name":"T. JACOBS","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"BORDEAUX|21|E. IBSAIENE","team":"BORDEAUX","num":21,"name":"E. IBSAIENE","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"BORDEAUX|22|M. PAGE-RELO","team":"BORDEAUX","num":22,"name":"M. PAGE-RELO","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"BORDEAUX|23|P. UBERTI","team":"BORDEAUX","num":23,"name":"P. UBERTI","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"LYON|1|GALLO","team":"LYON","num":1,"name":"GALLO","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LYON|2|CHAT","team":"LYON","num":2,"name":"CHAT","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LYON|3|HOYT","team":"LYON","num":3,"name":"HOYT","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LYON|4|SANSON","team":"LYON","num":4,"name":"SANSON","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LYON|5|ROUX","team":"LYON","num":5,"name":"ROUX","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LYON|6|CRETIN","team":"LYON","num":6,"name":"CRETIN","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LYON|7|ALLEN","team":"LYON","num":7,"name":"ALLEN","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LYON|8|BARET","team":"LYON","num":8,"name":"BARET","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LYON|9|GONZALEZ","team":"LYON","num":9,"name":"GONZALEZ","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LYON|10|MÉLIANDE","team":"LYON","num":10,"name":"MÉLIANDE","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LYON|11|WAINIQOLO","team":"LYON","num":11,"name":"WAINIQOLO","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LYON|12|SÉGURET","team":"LYON","num":12,"name":"SÉGURET","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LYON|13|MARAKU","team":"LYON","num":13,"name":"MARAKU","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LYON|14|DUMORTIER","team":"LYON","num":14,"name":"DUMORTIER","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LYON|15|TCHAPTCHET","team":"LYON","num":15,"name":"TCHAPTCHET","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LYON|16|G. MARCHAND","team":"LYON","num":16,"name":"G. MARCHAND","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"LYON|17|T. MOUKORO","team":"LYON","num":17,"name":"T. MOUKORO","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"LYON|18|M. OKUYA","team":"LYON","num":18,"name":"M. OKUYA","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"LYON|19|M. GOUZOU","team":"LYON","num":19,"name":"M. GOUZOU","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"LYON|20|C. CASSANG","team":"LYON","num":20,"name":"C. CASSANG","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"LYON|21|P. JACKSON","team":"LYON","num":21,"name":"P. JACKSON","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"LYON|22|T. REGARD","team":"LYON","num":22,"name":"T. REGARD","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"LYON|23|H. KAABÈCHE","team":"LYON","num":23,"name":"H. KAABÈCHE","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"BAYONNE|1|BORDELAI","team":"BAYONNE","num":1,"name":"BORDELAI","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BAYONNE|2|CRAMONT","team":"BAYONNE","num":2,"name":"CRAMONT","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BAYONNE|3|TATAFU","team":"BAYONNE","num":3,"name":"TATAFU","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BAYONNE|4|GÉRACI","team":"BAYONNE","num":4,"name":"GÉRACI","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BAYONNE|5|UHILA","team":"BAYONNE","num":5,"name":"UHILA","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BAYONNE|6|FISCHER","team":"BAYONNE","num":6,"name":"FISCHER","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BAYONNE|7|CAPILLA","team":"BAYONNE","num":7,"name":"CAPILLA","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BAYONNE|8|HABEL-KUEFFNER","team":"BAYONNE","num":8,"name":"HABEL-KUEFFNER","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BAYONNE|9|COLY","team":"BAYONNE","num":9,"name":"COLY","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BAYONNE|10|SEGONDS","team":"BAYONNE","num":10,"name":"SEGONDS","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BAYONNE|11|CARRERAS","team":"BAYONNE","num":11,"name":"CARRERAS","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BAYONNE|12|TUILAGI","team":"BAYONNE","num":12,"name":"TUILAGI","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BAYONNE|13|MAQALA","team":"BAYONNE","num":13,"name":"MAQALA","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BAYONNE|14|SPRING","team":"BAYONNE","num":14,"name":"SPRING","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BAYONNE|15|TIBERGHIEN","team":"BAYONNE","num":15,"name":"TIBERGHIEN","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"BAYONNE|16|F. BOSCH","team":"BAYONNE","num":16,"name":"F. BOSCH","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"BAYONNE|17|I. CALLES","team":"BAYONNE","num":17,"name":"I. CALLES","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"BAYONNE|18|E. JOHNSON","team":"BAYONNE","num":18,"name":"E. JOHNSON","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"BAYONNE|19|R. BRUNI","team":"BAYONNE","num":19,"name":"R. BRUNI","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"BAYONNE|20|B. HÉGUY","team":"BAYONNE","num":20,"name":"B. HÉGUY","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"BAYONNE|21|B. TILLOLES","team":"BAYONNE","num":21,"name":"B. TILLOLES","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"BAYONNE|22|R. DU PREEZ","team":"BAYONNE","num":22,"name":"R. DU PREEZ","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"BAYONNE|23|E. SETIANO","team":"BAYONNE","num":23,"name":"E. SETIANO","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"PARIS|1|ISCARO","team":"PARIS","num":1,"name":"ISCARO","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PARIS|2|PEYRESBLANQUES","team":"PARIS","num":2,"name":"PEYRESBLANQUES","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PARIS|3|MELIKIDZE","team":"PARIS","num":3,"name":"MELIKIDZE","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PARIS|4|GABRILLAGUES","team":"PARIS","num":4,"name":"GABRILLAGUES","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PARIS|5|METZ","team":"PARIS","num":5,"name":"METZ","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PARIS|6|HUGUET","team":"PARIS","num":6,"name":"HUGUET","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PARIS|7|HIRIGOYEN","team":"PARIS","num":7,"name":"HIRIGOYEN","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PARIS|8|SCELZO","team":"PARIS","num":8,"name":"SCELZO","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PARIS|9|KERR-BARLOW","team":"PARIS","num":9,"name":"KERR-BARLOW","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PARIS|10|CARBONEL","team":"PARIS","num":10,"name":"CARBONEL","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PARIS|11|ÉTIEN","team":"PARIS","num":11,"name":"ÉTIEN","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PARIS|12|VILI","team":"PARIS","num":12,"name":"VILI","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PARIS|13|DELBOUIS","team":"PARIS","num":13,"name":"DELBOUIS","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PARIS|14|IBO","team":"PARIS","num":14,"name":"IBO","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PARIS|15|BARRÉ","team":"PARIS","num":15,"name":"BARRÉ","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PARIS|16|T. MAKA","team":"PARIS","num":16,"name":"T. MAKA","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"PARIS|17|S. ABRAMISHVILI","team":"PARIS","num":17,"name":"S. ABRAMISHVILI","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"PARIS|18|T. HALAIFONUA","team":"PARIS","num":18,"name":"T. HALAIFONUA","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"PARIS|19|Y. TANGA","team":"PARIS","num":19,"name":"Y. TANGA","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"PARIS|20|T. MOTASSI","team":"PARIS","num":20,"name":"T. MOTASSI","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"PARIS|21|N. NÉNÉ","team":"PARIS","num":21,"name":"N. NÉNÉ","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"PARIS|22|J. BOTHA","team":"PARIS","num":22,"name":"J. BOTHA","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"PARIS|23|M. ALO-EMILE","team":"PARIS","num":23,"name":"M. ALO-EMILE","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"LA ROCHELLE|1|PENVERNE","team":"LA ROCHELLE","num":1,"name":"PENVERNE","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LA ROCHELLE|2|LATU","team":"LA ROCHELLE","num":2,"name":"LATU","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LA ROCHELLE|3|SORIN","team":"LA ROCHELLE","num":3,"name":"SORIN","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LA ROCHELLE|4|KANTÉ-SAMBA","team":"LA ROCHELLE","num":4,"name":"KANTÉ-SAMBA","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LA ROCHELLE|5|WAQANISARAVI","team":"LA ROCHELLE","num":5,"name":"WAQANISARAVI","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LA ROCHELLE|6|JÉGOU","team":"LA ROCHELLE","num":6,"name":"JÉGOU","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LA ROCHELLE|7|MCFARLAND","team":"LA ROCHELLE","num":7,"name":"MCFARLAND","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LA ROCHELLE|8|ALLDRITT","team":"LA ROCHELLE","num":8,"name":"ALLDRITT","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LA ROCHELLE|9|LE GARREC","team":"LA ROCHELLE","num":9,"name":"LE GARREC","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LA ROCHELLE|10|HASTOY","team":"LA ROCHELLE","num":10,"name":"HASTOY","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LA ROCHELLE|11|LEYDS","team":"LA ROCHELLE","num":11,"name":"LEYDS","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LA ROCHELLE|12|DAUNIVUCU","team":"LA ROCHELLE","num":12,"name":"DAUNIVUCU","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LA ROCHELLE|13|NINIASHVILI","team":"LA ROCHELLE","num":13,"name":"NINIASHVILI","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LA ROCHELLE|14|NOWELL","team":"LA ROCHELLE","num":14,"name":"NOWELL","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LA ROCHELLE|15|ELISSALDE","team":"LA ROCHELLE","num":15,"name":"ELISSALDE","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"LA ROCHELLE|16|Q. LESPIAUCQ","team":"LA ROCHELLE","num":16,"name":"Q. LESPIAUCQ","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"LA ROCHELLE|17|A. KADDOURI","team":"LA ROCHELLE","num":17,"name":"A. KADDOURI","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"LA ROCHELLE|18|T. ADÉLAÏDE","team":"LA ROCHELLE","num":18,"name":"T. ADÉLAÏDE","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"LA ROCHELLE|19|A. TIMO","team":"LA ROCHELLE","num":19,"name":"A. TIMO","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"LA ROCHELLE|20|P. BOUDEHENT","team":"LA ROCHELLE","num":20,"name":"P. BOUDEHENT","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"LA ROCHELLE|21|L. BOTIA","team":"LA ROCHELLE","num":21,"name":"L. BOTIA","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"LA ROCHELLE|22|V. BOUJU","team":"LA ROCHELLE","num":22,"name":"V. BOUJU","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"LA ROCHELLE|23|A. KUNTELIA","team":"LA ROCHELLE","num":23,"name":"A. KUNTELIA","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"CLERMONT|1|FRISACH","team":"CLERMONT","num":1,"name":"FRISACH","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CLERMONT|2|FOURCADE","team":"CLERMONT","num":2,"name":"FOURCADE","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CLERMONT|3|DZMANASHVILI","team":"CLERMONT","num":3,"name":"DZMANASHVILI","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CLERMONT|4|LANEN","team":"CLERMONT","num":4,"name":"LANEN","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CLERMONT|5|SWAIN","team":"CLERMONT","num":5,"name":"SWAIN","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CLERMONT|6|TIXERONT","team":"CLERMONT","num":6,"name":"TIXERONT","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CLERMONT|7|VESCHAMBRE","team":"CLERMONT","num":7,"name":"VESCHAMBRE","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CLERMONT|8|SOWAKULA","team":"CLERMONT","num":8,"name":"SOWAKULA","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CLERMONT|9|JAUNEAU","team":"CLERMONT","num":9,"name":"JAUNEAU","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CLERMONT|10|BOURAUX","team":"CLERMONT","num":10,"name":"BOURAUX","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CLERMONT|11|RAKA","team":"CLERMONT","num":11,"name":"RAKA","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CLERMONT|12|BELAUBRE","team":"CLERMONT","num":12,"name":"BELAUBRE","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CLERMONT|13|LOALOA","team":"CLERMONT","num":13,"name":"LOALOA","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CLERMONT|14|NANAI-SETURO","team":"CLERMONT","num":14,"name":"NANAI-SETURO","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CLERMONT|15|HAMDAOUI","team":"CLERMONT","num":15,"name":"HAMDAOUI","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CLERMONT|16|P. NARISIA","team":"CLERMONT","num":16,"name":"P. NARISIA","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"CLERMONT|17|G. AKHALADZE","team":"CLERMONT","num":17,"name":"G. AKHALADZE","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"CLERMONT|18|L. MICHAUX","team":"CLERMONT","num":18,"name":"L. MICHAUX","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"CLERMONT|19|A. CHALUS","team":"CLERMONT","num":19,"name":"A. CHALUS","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"CLERMONT|20|L. ZAMORA","team":"CLERMONT","num":20,"name":"L. ZAMORA","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"CLERMONT|21|H. PLUMMER","team":"CLERMONT","num":21,"name":"H. PLUMMER","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"CLERMONT|22|T. FRIER","team":"CLERMONT","num":22,"name":"T. FRIER","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"CLERMONT|23|N. EZ ZAHOUANY","team":"CLERMONT","num":23,"name":"N. EZ ZAHOUANY","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"RACING|1|KOLINGAR","team":"RACING","num":1,"name":"KOLINGAR","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"RACING|2|ESCOBAR","team":"RACING","num":2,"name":"ESCOBAR","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"RACING|3|BAMBA","team":"RACING","num":3,"name":"BAMBA","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"RACING|4|SANCONNIE","team":"RACING","num":4,"name":"SANCONNIE","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"RACING|5|TAOFIFENUA","team":"RACING","num":5,"name":"TAOFIFENUA","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"RACING|6|CAMARA","team":"RACING","num":6,"name":"CAMARA","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"RACING|7|URU","team":"RACING","num":7,"name":"URU","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"RACING|8|BAUDONNE","team":"RACING","num":8,"name":"BAUDONNE","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"RACING|9|GIBERT","team":"RACING","num":9,"name":"GIBERT","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"RACING|10|SEUNES","team":"RACING","num":10,"name":"SEUNES","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"RACING|11|RAVUTAUMADA","team":"RACING","num":11,"name":"RAVUTAUMADA","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"RACING|12|TUISOVA","team":"RACING","num":12,"name":"TUISOVA","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"RACING|13|HABOSI","team":"RACING","num":13,"name":"HABOSI","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"RACING|14|NAITUVI","team":"RACING","num":14,"name":"NAITUVI","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"RACING|15|SPRING","team":"RACING","num":15,"name":"SPRING","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"RACING|16|L. LEOTA","team":"RACING","num":16,"name":"L. LEOTA","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"RACING|17|É. JABEA NJOCKE","team":"RACING","num":17,"name":"É. JABEA NJOCKE","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"RACING|18|N. HUGHES","team":"RACING","num":18,"name":"N. HUGHES","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"RACING|19|N. MARTINS","team":"RACING","num":19,"name":"N. MARTINS","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"RACING|20|S. MANYARARA","team":"RACING","num":20,"name":"S. MANYARARA","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"RACING|21|M. MACHENAUD","team":"RACING","num":21,"name":"M. MACHENAUD","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"RACING|22|S. JAMES","team":"RACING","num":22,"name":"S. JAMES","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"RACING|23|T. TUPOU","team":"RACING","num":23,"name":"T. TUPOU","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"PERPIGNAN|1|BOYER GALLARDO","team":"PERPIGNAN","num":1,"name":"BOYER GALLARDO","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PERPIGNAN|2|MONTGAILLARD","team":"PERPIGNAN","num":2,"name":"MONTGAILLARD","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PERPIGNAN|3|GOMES SA","team":"PERPIGNAN","num":3,"name":"GOMES SA","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PERPIGNAN|4|TANGUY","team":"PERPIGNAN","num":4,"name":"TANGUY","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PERPIGNAN|5|WARION","team":"PERPIGNAN","num":5,"name":"WARION","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PERPIGNAN|6|DELLA SCHIAVA","team":"PERPIGNAN","num":6,"name":"DELLA SCHIAVA","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PERPIGNAN|7|LE CORVEC","team":"PERPIGNAN","num":7,"name":"LE CORVEC","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PERPIGNAN|8|SWINTON","team":"PERPIGNAN","num":8,"name":"SWINTON","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PERPIGNAN|9|MCGRATH","team":"PERPIGNAN","num":9,"name":"MCGRATH","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PERPIGNAN|10|URDAPILLETA","team":"PERPIGNAN","num":10,"name":"URDAPILLETA","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PERPIGNAN|11|GRANELL","team":"PERPIGNAN","num":11,"name":"GRANELL","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PERPIGNAN|12|MASCARENC","team":"PERPIGNAN","num":12,"name":"MASCARENC","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PERPIGNAN|13|ENNOR","team":"PERPIGNAN","num":13,"name":"ENNOR","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PERPIGNAN|14|FORNER","team":"PERPIGNAN","num":14,"name":"FORNER","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PERPIGNAN|15|TEDDER","team":"PERPIGNAN","num":15,"name":"TEDDER","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PERPIGNAN|16|M. LOTRIAN","team":"PERPIGNAN","num":16,"name":"M. LOTRIAN","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"PERPIGNAN|17|E. FORLETTA","team":"PERPIGNAN","num":17,"name":"E. FORLETTA","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"PERPIGNAN|18|P. YATO","team":"PERPIGNAN","num":18,"name":"P. YATO","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"PERPIGNAN|19|J. MADEIRA","team":"PERPIGNAN","num":19,"name":"J. MADEIRA","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"PERPIGNAN|20|J. HALL","team":"PERPIGNAN","num":20,"name":"J. HALL","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"PERPIGNAN|21|A. AUCAGNE","team":"PERPIGNAN","num":21,"name":"A. AUCAGNE","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"PERPIGNAN|22|R. BULIRUARUA","team":"PERPIGNAN","num":22,"name":"R. BULIRUARUA","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"PERPIGNAN|23|P. CECCARELLI","team":"PERPIGNAN","num":23,"name":"P. CECCARELLI","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"VANNES|1|BONIFACE","team":"VANNES","num":1,"name":"BONIFACE","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"VANNES|2|CHERRY","team":"VANNES","num":2,"name":"CHERRY","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"VANNES|3|SCHONERT","team":"VANNES","num":3,"name":"SCHONERT","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"VANNES|4|ALEMANNO","team":"VANNES","num":4,"name":"ALEMANNO","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"VANNES|5|DESJEUX","team":"VANNES","num":5,"name":"DESJEUX","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"VANNES|6|BLANC-MAPPAZ","team":"VANNES","num":6,"name":"BLANC-MAPPAZ","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"VANNES|7|GORRISSEN","team":"VANNES","num":7,"name":"GORRISSEN","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"VANNES|8|EDWARDS","team":"VANNES","num":8,"name":"EDWARDS","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"VANNES|9|RURU","team":"VANNES","num":9,"name":"RURU","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"VANNES|10|LAFAGE","team":"VANNES","num":10,"name":"LAFAGE","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"VANNES|11|STEVENSON","team":"VANNES","num":11,"name":"STEVENSON","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"VANNES|12|BOUDEHENT","team":"VANNES","num":12,"name":"BOUDEHENT","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"VANNES|13|TACCOLA","team":"VANNES","num":13,"name":"TACCOLA","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"VANNES|14|SURANO","team":"VANNES","num":14,"name":"SURANO","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"VANNES|15|BOUTHIER","team":"VANNES","num":15,"name":"BOUTHIER","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"VANNES|16|M. SANERIVI","team":"VANNES","num":16,"name":"M. SANERIVI","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"VANNES|17|H. DJEHI","team":"VANNES","num":17,"name":"H. DJEHI","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"VANNES|18|E. MARKS","team":"VANNES","num":18,"name":"E. MARKS","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"VANNES|19|S. KALAMAFONI","team":"VANNES","num":19,"name":"S. KALAMAFONI","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"VANNES|20|S. AUGRY","team":"VANNES","num":20,"name":"S. AUGRY","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"VANNES|21|S. KURUVOLI","team":"VANNES","num":21,"name":"S. KURUVOLI","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"VANNES|22|I. TABUAVOU","team":"VANNES","num":22,"name":"I. TABUAVOU","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"VANNES|23|S. BOURGEOIS","team":"VANNES","num":23,"name":"S. BOURGEOIS","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"PAU|1|KAULASHVILI","team":"PAU","num":1,"name":"KAULASHVILI","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PAU|2|MONTOYA","team":"PAU","num":2,"name":"MONTOYA","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PAU|3|LACLAYAT","team":"PAU","num":3,"name":"LACLAYAT","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PAU|4|AURADOU","team":"PAU","num":4,"name":"AURADOU","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PAU|5|PICQUETTE","team":"PAU","num":5,"name":"PICQUETTE","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PAU|6|GRONDONA","team":"PAU","num":6,"name":"GRONDONA","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PAU|7|ZEGUEUR","team":"PAU","num":7,"name":"ZEGUEUR","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PAU|8|GORGADZE","team":"PAU","num":8,"name":"GORGADZE","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PAU|9|DAUBAGNA","team":"PAU","num":9,"name":"DAUBAGNA","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PAU|10|DESPÉRÈS","team":"PAU","num":10,"name":"DESPÉRÈS","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PAU|11|GRANDIDIER","team":"PAU","num":11,"name":"GRANDIDIER","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PAU|12|DECRON","team":"PAU","num":12,"name":"DECRON","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PAU|13|MANU","team":"PAU","num":13,"name":"MANU","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PAU|14|MARTA","team":"PAU","num":14,"name":"MARTA","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PAU|15|ATTISSOGBE","team":"PAU","num":15,"name":"ATTISSOGBE","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"PAU|16|Y. DELHOMMEL","team":"PAU","num":16,"name":"Y. DELHOMMEL","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"PAU|17|H. PARROU","team":"PAU","num":17,"name":"H. PARROU","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"PAU|18|T. JOLMÈS","team":"PAU","num":18,"name":"T. JOLMÈS","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"PAU|19|B. PESENTI","team":"PAU","num":19,"name":"B. PESENTI","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"PAU|20|R. COUTY","team":"PAU","num":20,"name":"R. COUTY","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"PAU|21|G. GARCIA","team":"PAU","num":21,"name":"G. GARCIA","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"PAU|22|C. MONDINAT","team":"PAU","num":22,"name":"C. MONDINAT","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"PAU|23|S. TOKOLAHI","team":"PAU","num":23,"name":"S. TOKOLAHI","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"CASTRES|1|WALCKER","team":"CASTRES","num":1,"name":"WALCKER","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CASTRES|2|DURAND","team":"CASTRES","num":2,"name":"DURAND","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CASTRES|3|CORATO","team":"CASTRES","num":3,"name":"CORATO","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CASTRES|4|DUCAT","team":"CASTRES","num":4,"name":"DUCAT","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CASTRES|5|VANVERBERGHE","team":"CASTRES","num":5,"name":"VANVERBERGHE","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CASTRES|6|DELAPORTE","team":"CASTRES","num":6,"name":"DELAPORTE","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CASTRES|7|RINGUET","team":"CASTRES","num":7,"name":"RINGUET","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CASTRES|8|WATSON","team":"CASTRES","num":8,"name":"WATSON","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CASTRES|9|ARATA","team":"CASTRES","num":9,"name":"ARATA","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CASTRES|10|LE BRUN","team":"CASTRES","num":10,"name":"LE BRUN","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CASTRES|11|BAGET","team":"CASTRES","num":11,"name":"BAGET","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CASTRES|12|GOODHUE","team":"CASTRES","num":12,"name":"GOODHUE","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CASTRES|13|BOTITU","team":"CASTRES","num":13,"name":"BOTITU","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CASTRES|14|AMBADIANG","team":"CASTRES","num":14,"name":"AMBADIANG","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CASTRES|15|CHABOUNI","team":"CASTRES","num":15,"name":"CHABOUNI","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"CASTRES|16|P. COLONNA","team":"CASTRES","num":16,"name":"P. COLONNA","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"CASTRES|17|L. GUÉROIS-GALISSON","team":"CASTRES","num":17,"name":"L. GUÉROIS-GALISSON","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"CASTRES|18|C. GABRIEL","team":"CASTRES","num":18,"name":"C. GABRIEL","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"CASTRES|19|A. PAPALI'I","team":"CASTRES","num":19,"name":"A. PAPALI'I","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"CASTRES|20|J. FERNANDEZ","team":"CASTRES","num":20,"name":"J. FERNANDEZ","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"CASTRES|21|T. VIDAL","team":"CASTRES","num":21,"name":"T. VIDAL","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"CASTRES|22|A. COCAGI","team":"CASTRES","num":22,"name":"A. COCAGI","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"CASTRES|23|L. CHILACHAVA","team":"CASTRES","num":23,"name":"L. CHILACHAVA","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"TOULOUSE|1|BERTRAND","team":"TOULOUSE","num":1,"name":"BERTRAND","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"TOULOUSE|2|LACOMBRE","team":"TOULOUSE","num":2,"name":"LACOMBRE","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"TOULOUSE|3|RAPETTI","team":"TOULOUSE","num":3,"name":"RAPETTI","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"TOULOUSE|4|MARTIN-BONNARD","team":"TOULOUSE","num":4,"name":"MARTIN-BONNARD","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"TOULOUSE|5|MERKLER","team":"TOULOUSE","num":5,"name":"MERKLER","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"TOULOUSE|6|CROS","team":"TOULOUSE","num":6,"name":"CROS","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"TOULOUSE|7|KOUASSI","team":"TOULOUSE","num":7,"name":"KOUASSI","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"TOULOUSE|8|ROUMAT","team":"TOULOUSE","num":8,"name":"ROUMAT","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"TOULOUSE|9|GRAOU","team":"TOULOUSE","num":9,"name":"GRAOU","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"TOULOUSE|10|MALLÍA","team":"TOULOUSE","num":10,"name":"MALLÍA","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"TOULOUSE|11|LEBEL","team":"TOULOUSE","num":11,"name":"LEBEL","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"TOULOUSE|12|AMATI","team":"TOULOUSE","num":12,"name":"AMATI","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"TOULOUSE|13|MENONCELLO","team":"TOULOUSE","num":13,"name":"MENONCELLO","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"TOULOUSE|14|NEMOR","team":"TOULOUSE","num":14,"name":"NEMOR","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"TOULOUSE|15|REMUE","team":"TOULOUSE","num":15,"name":"REMUE","cap":false,"starter":true,"match":"BORDEAUX"},{"id":"TOULOUSE|16|J. MARCHAND","team":"TOULOUSE","num":16,"name":"J. MARCHAND","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"TOULOUSE|17|R. NETI","team":"TOULOUSE","num":17,"name":"R. NETI","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"TOULOUSE|18|E. ELÍAS","team":"TOULOUSE","num":18,"name":"E. ELÍAS","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"TOULOUSE|19|T. NTAMACK","team":"TOULOUSE","num":19,"name":"T. NTAMACK","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"TOULOUSE|20|S. DAROQUE","team":"TOULOUSE","num":20,"name":"S. DAROQUE","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"TOULOUSE|21|A. CAPUOZZO","team":"TOULOUSE","num":21,"name":"A. CAPUOZZO","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"TOULOUSE|22|B. PUCCIARIELLO","team":"TOULOUSE","num":22,"name":"B. PUCCIARIELLO","cap":false,"starter":false,"match":"BORDEAUX"},{"id":"TOULOUSE|23|G. COLOMBE","team":"TOULOUSE","num":23,"name":"G. COLOMBE","cap":false,"starter":false,"match":"BORDEAUX"}]}</script>
-<script type="text/plain" id="tpl"><!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Compos par poste · Grande Mêlée<\/title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap">
-<style>
-:root{
-  --bg:#EDF1EA; --surface:#FFFFFF; --ink:#14241B; --muted:#566559; --line:#CFD8CA;
-  --grass:#2B6A45; --on-grass:#FFFFFF; --flag:#F0B400; --on-flag:#2A2000; --danger:#A32A1B;
-  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
-  --body:"Barlow",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
-  box-sizing:border-box;
-  padding-top:env(safe-area-inset-top,0px);
-  padding-bottom:env(safe-area-inset-bottom,0px);
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --bg:#0F1A14; --surface:#16241C; --ink:#E6EEE4; --muted:#94A597; --line:#27382D;
-    --grass:#5FB37F; --on-grass:#07140D; --flag:#F3C13A; --on-flag:#2A2000; --danger:#F08A7A;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#0F1A14; --surface:#16241C; --ink:#E6EEE4; --muted:#94A597; --line:#27382D;
-  --grass:#5FB37F; --on-grass:#07140D; --flag:#F3C13A; --on-flag:#2A2000; --danger:#F08A7A;
-}
-html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
-*,*::before,*::after{box-sizing:inherit}
-body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font:400 16px/1.45 var(--body)}
-main{max-width:640px;margin:0 auto;padding:20px 16px 48px}
-h1{font:700 34px/1 var(--display);margin:0 0 4px;letter-spacing:.2px}
-.sub{color:var(--muted);margin:0 0 6px}
-.updated{color:var(--muted);font-size:14px;margin:0 0 16px}
-button,input,select,textarea{font:inherit;color:inherit}
-:focus-visible{outline:3px solid var(--flag);outline-offset:2px}
-
-details.add{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-bottom:14px}
-details.add summary{cursor:pointer;padding:12px 14px;font-weight:600;list-style:none}
-details.add summary::-webkit-details-marker{display:none}
-details.add summary::after{content:"+";float:right;font:700 22px/1 var(--display);color:var(--grass)}
-details.add[open] summary::after{content:"–"}
-.add-body{padding:0 14px 14px}
-textarea{width:100%;min-height:150px;resize:vertical;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);font-size:15px}
-.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}
-.btn{border:1px solid var(--line);background:var(--surface);padding:9px 14px;border-radius:8px;cursor:pointer;font-weight:600}
-.btn.primary{background:var(--grass);color:var(--on-grass);border-color:var(--grass)}
-.btn.ghost{color:var(--muted)}
-.btn[disabled]{opacity:.55;cursor:default}
-.field{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);margin-top:10px}
-.msg{margin:10px 0 0;font-size:14px;color:var(--muted)}
-.msg.err{color:var(--danger)}
-.pubbar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--flag);color:var(--on-flag);border-radius:10px;padding:10px 12px;margin-bottom:14px;font-weight:600}
-.pubbar .btn{background:var(--on-flag);color:var(--flag);border-color:var(--on-flag)}
-
-.loaded{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
-.loaded button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 10px;font-size:14px;cursor:pointer}
-.loaded button span{color:var(--muted);margin-left:6px}
-
-.filters{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:8px 0 10px;border-bottom:1px solid var(--line);margin-bottom:6px}
-.filters input[type=search]{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
-.chips{display:flex;gap:6px;overflow-x:auto;padding:8px 0 2px;-webkit-overflow-scrolling:touch}
-.chip{flex:0 0 auto;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:14px;cursor:pointer;white-space:nowrap}
-.chip[aria-pressed="true"]{background:var(--grass);color:var(--on-grass);border-color:var(--grass)}
-.toggles{display:flex;gap:14px;padding-top:8px;font-size:14px;flex-wrap:wrap}
-.toggles label{display:flex;gap:6px;align-items:center;cursor:pointer}
-
-section.pos{margin-top:22px}
-section.pos h2{display:flex;align-items:baseline;justify-content:space-between;font:700 24px/1 var(--display);margin:0 0 8px;padding-bottom:6px;border-bottom:2px solid var(--grass)}
-section.pos.rem h2{border-bottom-color:var(--flag)}
-section.pos h2 small{font:500 14px var(--body);color:var(--muted)}
-h3.club{font:700 18px/1 var(--display);margin:14px 0 6px;color:var(--muted);letter-spacing:.3px}
-ul{list-style:none;margin:0;padding:0}
-li.p{display:grid;grid-template-columns:48px 1fr auto;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:6px}
-.num{font:700 34px/1 var(--display);text-align:center;color:var(--grass)}
-li.p.sub .num{color:var(--muted)}
-.name{font-weight:600}
-.meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:2px;font-size:13px;color:var(--muted)}
-.dot{width:9px;height:9px;border-radius:50%;display:inline-block}
-.tag{background:var(--flag);color:var(--on-flag);border-radius:4px;padding:0 6px;font-size:12px;font-weight:600}
-.tag.out{background:transparent;border:1px solid var(--muted);color:var(--muted)}
-.star{border:0;background:none;font-size:24px;line-height:1;cursor:pointer;color:var(--muted);padding:6px}
-.star[aria-pressed="true"]{color:var(--flag)}
-.empty{margin-top:28px;padding:22px 16px;border:1px dashed var(--line);border-radius:10px;color:var(--muted)}
-.empty strong{color:var(--ink);display:block;margin-bottom:4px}
-.note{font-size:13px;color:var(--muted);margin-top:26px}
-@media (prefers-reduced-motion:no-preference){.chip,.btn{transition:background .15s}}
-<\/style>
-<\/head>
-<body>
-<main>
-  <h1>Compos par poste<\/h1>
-  <p class="sub">Qui joue à quel poste cette journée de Top 14.<\/p>
-  <p class="updated" id="updated"><\/p>
-
-  <div class="pubbar" id="pubbar" hidden>
-    <span>Modifications non publiées<\/span>
-    <button class="btn" id="pub" type="button">Publier pour le groupe<\/button>
-  <\/div>
-
-  <details class="add" id="add" hidden>
-    <summary>Ajouter une composition<\/summary>
-    <div class="add-body">
-      <textarea id="txt" placeholder="Colle ici le texte copié depuis Rugbyrama. Exemple :&#10;La composition de Castres : 15. Chabouni ; 14. Ambadiang, ...&#10;Remplaçants : 16. Colonna, ..."><\/textarea>
-      <input class="field" id="club" type="text" placeholder="Nom du club (seulement si le texte ne le contient pas)">
-      <div class="row">
-        <button class="btn primary" id="go" type="button">Analyser<\/button>
-        <button class="btn ghost" id="clear" type="button">Tout effacer<\/button>
-      <\/div>
-      <p class="msg" id="msg" role="status"><\/p>
-    <\/div>
-  <\/details>
-
-  <div class="loaded" id="loaded" aria-label="Compositions chargées" hidden><\/div>
-
-  <div class="filters" id="filters" hidden>
-    <input type="search" id="q" placeholder="Chercher un joueur" aria-label="Chercher un joueur">
-    <div class="chips" id="fclubs" role="group" aria-label="Filtrer par club"><\/div>
-    <div class="chips" id="chips" role="group" aria-label="Filtrer par poste"><\/div>
-    <div class="toggles">
-      <label><input type="checkbox" id="onlyStart"> Titulaires uniquement<\/label>
-      <label><input type="checkbox" id="onlySub"> Remplaçants uniquement<\/label>
-      <label><input type="checkbox" id="onlyFav"> Favoris uniquement<\/label>
-    <\/div>
-  <\/div>
-
-  <div id="results"><\/div>
-  <p class="note" id="note" hidden>Les remplaçants sont listés par numéro de maillot, sans poste : la feuille de match ne précise pas où ils entrent. Tes favoris et tes filtres sont personnels, enregistrés sur ton téléphone.<\/p>
-<\/main>
-
-<script type="application/json" id="seed">__SEED__<\/script>
-<script type="text/plain" id="tpl">__TPL__<\/script>
 <script>
 (function(){
   var POS=[
@@ -278,15 +148,12 @@ li.p.sub .num{color:var(--muted)}
   ];
   var MAP={1:'pil',2:'tal',3:'pil',4:'2l',5:'2l',6:'3l',7:'3l',8:'3l',9:'dm',10:'ouv',11:'ail',12:'cen',13:'cen',14:'ail',15:'arr'};
   var FKEY='gm-favs-v2';
-  var players=[], favs={}, posFilter='all', clubSel={}, updated=null, canWrite=false, dirty=false;
-  var LT='<', BS=String.fromCharCode(92), SL='/';
+  var players=[], favs={}, posFilter='all', clubSel={}, updated=null, loadError=false;
+  var isAdmin=/[?&]admin(=|&|$)/.test(location.search);
 
   function $(id){return document.getElementById(id)}
   function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
-  function readSeed(){
-    try{var d=JSON.parse($('seed').textContent); players=d.players||[]; updated=d.updated||null;}catch(e){}
-    try{var b=localStorage.getItem(FKEY); if(b) favs=JSON.parse(b)||{};}catch(e){}
-  }
+  function loadFavs(){try{var b=localStorage.getItem(FKEY); if(b) favs=JSON.parse(b)||{};}catch(e){}}
   function saveFavs(){try{localStorage.setItem(FKEY,JSON.stringify(favs));}catch(e){}}
   function hue(s){var h=0;for(var i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))%360;return h}
   function clean(n){return n.replace(/\(\s*cap\.?\s*\)/i,'').replace(/[\s.]+$/,'').trim()}
@@ -327,14 +194,24 @@ li.p.sub .num{color:var(--muted)}
     var teams={}; list.forEach(function(p){teams[p.team]=1});
     players=players.filter(function(p){return !teams[p.team]});
     list.forEach(function(p){players.push(p)});
-    markDirty();
+    refreshOut();
   }
-  function markDirty(){dirty=true; $('pubbar').hidden=false;}
 
   function setMsg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'')}
   function teamsList(){
     var t=[]; players.forEach(function(p){if(t.indexOf(p.team)<0)t.push(p.team)}); return t;
   }
+  // Fichier compos.json à copier sur GitHub : un joueur par ligne pour des modifications lisibles
+  function buildJson(){
+    return '{"updated":'+JSON.stringify(new Date().toISOString())+',"players":[\n'+
+      players.map(function(p){return JSON.stringify(p)}).join(',\n')+'\n]}\n';
+  }
+  function refreshOut(){
+    if(!isAdmin) return;
+    $('outbox').hidden=false;
+    $('jsonout').value=buildJson();
+  }
+
   function renderUpdated(){
     var el=$('updated');
     if(!updated||!players.length){el.textContent='';return}
@@ -345,266 +222,13 @@ li.p.sub .num{color:var(--muted)}
   }
   function renderLoaded(){
     var box=$('loaded'); box.innerHTML='';
-    if(!canWrite||!players.length){box.hidden=true;return}
-    box.hidden=false;
-    teamsList().forEach(function(t){
-      var b=document.createElement('button'); b.type='button';
-      b.setAttribute('aria-label','Retirer '+t);
-      b.innerHTML=esc(t)+'<span aria-hidden="true">×<\/span>';
-      b.onclick=function(){players=players.filter(function(p){return p.team!==t}); markDirty(); render();};
-      box.appendChild(b);
-    });
-  }
-  function renderFilters(){
-    var has=players.length>0;
-    $('filters').hidden=!has; $('note').hidden=!has;
-    if(!has) return;
-    var teams=teamsList();
-    Object.keys(clubSel).forEach(function(t){if(teams.indexOf(t)<0) delete clubSel[t]});
-    var cbox=$('fclubs'); cbox.innerHTML='';
-    var all=document.createElement('button'); all.type='button'; all.className='chip'; all.textContent='Tous les clubs';
-    all.setAttribute('aria-pressed',Object.keys(clubSel).length?'false':'true');
-    all.onclick=function(){clubSel={}; renderFilters(); renderResults();};
-    cbox.appendChild(all);
-    teams.forEach(function(t){
-      var c=document.createElement('button'); c.type='button'; c.className='chip'; c.textContent=t;
-      c.setAttribute('aria-pressed',clubSel[t]?'true':'false');
-      c.onclick=function(){ if(clubSel[t]) delete clubSel[t]; else clubSel[t]=1; renderFilters(); renderResults(); };
-      cbox.appendChild(c);
-    });
-    var chips=$('chips'); chips.innerHTML='';
-    [{id:'all',label:'Tous les postes'}].concat(POS).concat([{id:'rem',label:'Remplaçants'}]).forEach(function(p){
-      var c=document.createElement('button'); c.type='button'; c.className='chip'; c.textContent=p.label;
-      c.setAttribute('aria-pressed',posFilter===p.id?'true':'false');
-      c.onclick=function(){posFilter=p.id; renderFilters(); renderResults();};
-      chips.appendChild(c);
-    });
-  }
-  function row(p){
-    var on=!!favs[p.id];
-    return '<li class="p'+(p.starter?'':' sub')+'"><div class="num">'+p.num+'<\/div><div><div class="name">'+esc(p.name)+'<\/div>'+
-      '<div class="meta"><span class="dot" style="background:hsl('+hue(p.team)+',55%,48%)"><\/span>'+esc(p.team)+
-      (p.cap?' <span class="tag">cap.<\/span>':'')+'<\/div><\/div>'+
-      '<button class="star" type="button" data-id="'+esc(p.id)+'" aria-pressed="'+on+'" aria-label="Favori : '+esc(p.name)+'">'+(on?'★':'☆')+'<\/button><\/li>';
-  }
-  function renderResults(){
-    var res=$('results');
-    if(!players.length){
-      res.innerHTML=canWrite
-        ?'<div class="empty"><strong>Aucune composition pour l\'instant<\/strong>Colle le texte d\'une composition ci-dessus, touche « Analyser », puis « Publier pour le groupe ».<\/div>'
-        :'<div class="empty"><strong>Pas encore de compositions<\/strong>Reviens un peu plus tard : les compos de la journée seront publiées ici.<\/div>';
-      return;
-    }
-    var q=$('q').value.trim().toLowerCase(), hasClub=Object.keys(clubSel).length>0,
-        onlyStart=$('onlyStart').checked, onlySub=$('onlySub').checked, onlyFav=$('onlyFav').checked, html='', total=0;
-    function ok(p){
-      if(hasClub && !clubSel[p.team]) return false;
-      if(onlyFav && !favs[p.id]) return false;
-      if(q && p.name.toLowerCase().indexOf(q)<0) return false;
-      return true;
-    }
-    var showStarters=posFilter!=='rem' && !onlySub;
-    var showSubs=(posFilter==='all'||posFilter==='rem') && !onlyStart;
-    if(showStarters){
-      POS.forEach(function(g){
-        if(posFilter!=='all' && posFilter!==g.id) return;
-        var items=players.filter(function(p){return p.starter && MAP[p.num]===g.id && ok(p)}).sort(function(a,b){
-          if(a.team!==b.team) return a.team<b.team?-1:1;
-          return a.num-b.num;
-        });
-        if(!items.length) return;
-        total+=items.length;
-        html+='<section class="pos"><h2>'+g.label+'<small>'+items.length+' joueur'+(items.length>1?'s':'')+'<\/small><\/h2><ul>'+items.map(row).join('')+'<\/ul><\/section>';
-      });
-    }
-    if(showSubs){
-      var subs=players.filter(function(p){return !p.starter && ok(p)}).sort(function(a,b){
-        if(a.team!==b.team) return a.team<b.team?-1:1;
-        return a.num-b.num;
-      });
-      if(subs.length){
-        total+=subs.length;
-        html+='<section class="pos rem"><h2>Remplaçants<small>'+subs.length+' joueur'+(subs.length>1?'s':'')+'<\/small><\/h2>';
-        var cur=null, open=false;
-        subs.forEach(function(p){
-          if(p.team!==cur){
-            if(open) html+='<\/ul>';
-            html+='<h3 class="club">'+esc(p.team)+'<\/h3><ul>'; cur=p.team; open=true;
-          }
-          html+=row(p);
-        });
-        if(open) html+='<\/ul>';
-        html+='<\/section>';
-      }
-    }
-    if(!total) html='<div class="empty"><strong>Aucun joueur avec ces filtres<\/strong>Élargis la recherche ou retire un filtre.<\/div>';
-    res.innerHTML=html;
-    Array.prototype.forEach.call(res.querySelectorAll('.star'),function(b){
-      b.onclick=function(){
-        var id=b.getAttribute('data-id');
-        if(favs[id]) delete favs[id]; else favs[id]=1;
-        saveFavs(); renderResults();
-      };
-    });
-  }
-  function render(){renderUpdated();renderLoaded();renderFilters();renderResults()}
-
-  // Publication pour le groupe : la page se republie avec les compositions embarquées
-  async function publishAll(){
-    var art=await claude.use('artifact');
-    if(!art) throw {code:'not_granted'};
-    var seedTok='__SE'+'ED__', tplTok='__TP'+'L__';
-    var seed=JSON.stringify({updated:new Date().toISOString(),players:players}).split(LT).join('\\u003c');
-    var tpl=$('tpl').textContent.split(LT+BS+SL).join(LT+SL);
-    var tplEsc=tpl.split(LT+SL).join(LT+BS+SL);
-    var html=tpl.split(seedTok).join(seed).split(tplTok).join(tplEsc);
-    return art.publish(html);
-  }
-  function initOwner(){
-    $('add').hidden=false;
-    $('add').open=!players.length;
-    $('go').onclick=function(){
-      var t=$('txt').value.trim();
-      if(!t){setMsg('Colle d\'abord une composition.',true);return}
-      var r=parse(t,$('club').value);
-      if(r.error){setMsg(r.error,true);return}
-      addPlayers(r.list);
-      setMsg(r.list.length+' joueurs ajoutés ('+r.teams.join(' et ')+'). Touche « Publier pour le groupe » quand tu as fini.');
-      $('txt').value=''; $('club').value='';
-      render();
-    };
-    $('clear').onclick=function(){
-      if(!players.length){setMsg('Rien à effacer.');return}
-      players=[]; markDirty(); setMsg('Compositions effacées. Publie pour que le groupe voie le changement.'); render();
-    };
-    $('pub').onclick=async function(){
-      var b=$('pub'); b.disabled=true; b.textContent='Publication…';
-      try{ await publishAll(); }
-      catch(e){
-        b.disabled=false; b.textContent='Publier pour le groupe';
-        var c=e&&e.code;
-        $('add').open=true;
-        if(c==='conflict') setMsg('Une autre version vient d\'être publiée, la page se recharge.',true);
-        else if(c==='not_writer'||c==='not_granted'||c==='not_declared'||c==='capability_disabled'||c==='consent_required') setMsg('La publication n\'est pas possible depuis cette vue. Envoie les compositions à Claude dans la conversation pour qu\'il publie la mise à jour.',true);
-        else if(c==='rate_limited') setMsg('Trop de publications d\'affilée, attends un instant.',true);
-        else setMsg('La publication a échoué, réessaie dans un instant.',true);
-      }
-    };
-  }
-
-  ['q','onlyFav'].forEach(function(id){
-    $(id).addEventListener(id==='q'?'input':'change',renderResults);
-  });
-  $('onlyStart').addEventListener('change',function(){if(this.checked)$('onlySub').checked=false;renderResults()});
-  $('onlySub').addEventListener('change',function(){if(this.checked)$('onlyStart').checked=false;renderResults()});
-
-  readSeed();
-  render();
-
-  // Seule la personne qui peut modifier la page voit l'ajout de compos
-  (async function(){
-    try{
-      if(typeof claude==='undefined'||!claude.use) return;
-      var user=await claude.use('user');
-      var can=user?await user.canEdit():false;
-      var art=can?await claude.use('artifact'):null;
-      if(can&&art){canWrite=true; initOwner(); render();}
-    }catch(e){}
-  })();
-})();
-<\/script>
-<\/body>
-<\/html>
-</script>
-<script>
-(function(){
-  var POS=[
-    {id:'pil',label:'Piliers'},
-    {id:'tal',label:'Talonneurs'},
-    {id:'2l',label:'Deuxièmes lignes'},
-    {id:'3l',label:'Troisièmes lignes'},
-    {id:'dm',label:'Demis de mêlée'},
-    {id:'ouv',label:'Ouvreurs'},
-    {id:'cen',label:'Centres'},
-    {id:'ail',label:'Ailiers'},
-    {id:'arr',label:'Arrières'}
-  ];
-  var MAP={1:'pil',2:'tal',3:'pil',4:'2l',5:'2l',6:'3l',7:'3l',8:'3l',9:'dm',10:'ouv',11:'ail',12:'cen',13:'cen',14:'ail',15:'arr'};
-  var FKEY='gm-favs-v2';
-  var players=[], favs={}, posFilter='all', clubSel={}, updated=null, canWrite=false, dirty=false;
-  var LT='<', BS=String.fromCharCode(92), SL='/';
-
-  function $(id){return document.getElementById(id)}
-  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
-  function readSeed(){
-    try{var d=JSON.parse($('seed').textContent); players=d.players||[]; updated=d.updated||null;}catch(e){}
-    try{var b=localStorage.getItem(FKEY); if(b) favs=JSON.parse(b)||{};}catch(e){}
-  }
-  function saveFavs(){try{localStorage.setItem(FKEY,JSON.stringify(favs));}catch(e){}}
-  function hue(s){var h=0;for(var i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))%360;return h}
-  function clean(n){return n.replace(/\(\s*cap\.?\s*\)/i,'').replace(/[\s.]+$/,'').trim()}
-
-  // Lecture du texte collé
-  function parseEntries(block){
-    var out=[], re=/(\d{1,2})\s*\.\s*([^;,\n]+)/g, m;
-    while((m=re.exec(block))){
-      var num=parseInt(m[1],10);
-      if(num<1||num>23) continue;
-      var raw=m[2], cap=/\(\s*cap/i.test(raw), name=clean(raw);
-      if(name) out.push({num:num,name:name,cap:cap});
-    }
-    return out;
-  }
-  function parse(text,fallbackClub){
-    var re=/La composition (?:de|du|des|d')\s*([^:\n]+?)\s*:/gi, heads=[], m;
-    while((m=re.exec(text))) heads.push({team:m[1].trim(),start:m.index+m[0].length,hs:m.index});
-    var blocks=[];
-    if(heads.length){
-      heads.forEach(function(h,i){
-        blocks.push({team:h.team,body:text.slice(h.start,i+1<heads.length?heads[i+1].hs:undefined)});
-      });
-    } else if(fallbackClub){
-      blocks.push({team:fallbackClub.trim(),body:text});
-    } else return {error:'Je ne trouve pas le nom du club. Ajoute « La composition de … : » avant la liste, ou remplis le champ « Nom du club ».'};
-    var match=blocks.length===2?blocks[0].team+' – '+blocks[1].team:blocks[0].team;
-    var list=[];
-    blocks.forEach(function(b){
-      parseEntries(b.body).forEach(function(e){
-        list.push({id:b.team+'|'+e.num+'|'+e.name,team:b.team,num:e.num,name:e.name,cap:e.cap,starter:e.num<=15,match:match});
-      });
-    });
-    if(!list.length) return {error:'Aucun joueur reconnu. Vérifie que les joueurs sont écrits sous la forme « 15. Nom ».'};
-    return {list:list,teams:blocks.map(function(b){return b.team})};
-  }
-  function addPlayers(list){
-    var teams={}; list.forEach(function(p){teams[p.team]=1});
-    players=players.filter(function(p){return !teams[p.team]});
-    list.forEach(function(p){players.push(p)});
-    markDirty();
-  }
-  function markDirty(){dirty=true; $('pubbar').hidden=false;}
-
-  function setMsg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'')}
-  function teamsList(){
-    var t=[]; players.forEach(function(p){if(t.indexOf(p.team)<0)t.push(p.team)}); return t;
-  }
-  function renderUpdated(){
-    var el=$('updated');
-    if(!updated||!players.length){el.textContent='';return}
-    try{
-      var d=new Date(updated);
-      el.textContent='Compos mises à jour le '+d.toLocaleString('fr-FR',{weekday:'long',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'});
-    }catch(e){el.textContent=''}
-  }
-  function renderLoaded(){
-    var box=$('loaded'); box.innerHTML='';
-    if(!canWrite||!players.length){box.hidden=true;return}
+    if(!isAdmin||!players.length){box.hidden=true;return}
     box.hidden=false;
     teamsList().forEach(function(t){
       var b=document.createElement('button'); b.type='button';
       b.setAttribute('aria-label','Retirer '+t);
       b.innerHTML=esc(t)+'<span aria-hidden="true">×</span>';
-      b.onclick=function(){players=players.filter(function(p){return p.team!==t}); markDirty(); render();};
+      b.onclick=function(){players=players.filter(function(p){return p.team!==t}); refreshOut(); render();};
       box.appendChild(b);
     });
   }
@@ -643,8 +267,9 @@ li.p.sub .num{color:var(--muted)}
   function renderResults(){
     var res=$('results');
     if(!players.length){
-      res.innerHTML=canWrite
-        ?'<div class="empty"><strong>Aucune composition pour l\'instant</strong>Colle le texte d\'une composition ci-dessus, touche « Analyser », puis « Publier pour le groupe ».</div>'
+      if(loadError) res.innerHTML='<div class="empty"><strong>Compositions introuvables</strong>Le fichier compos.json n\'a pas pu être chargé. Vérifie qu\'il est au même endroit que cette page.</div>';
+      else res.innerHTML=isAdmin
+        ?'<div class="empty"><strong>Aucune composition pour l\'instant</strong>Colle une composition ci-dessus et touche « Analyser ».</div>'
         :'<div class="empty"><strong>Pas encore de compositions</strong>Reviens un peu plus tard : les compos de la journée seront publiées ici.</div>';
       return;
     }
@@ -702,47 +327,32 @@ li.p.sub .num{color:var(--muted)}
   }
   function render(){renderUpdated();renderLoaded();renderFilters();renderResults()}
 
-  // Publication pour le groupe : la page se republie avec les compositions embarquées
-  async function publishAll(){
-    var art=await claude.use('artifact');
-    if(!art) throw {code:'not_granted'};
-    var seedTok='__SE'+'ED__', tplTok='__TP'+'L__';
-    var seed=JSON.stringify({updated:new Date().toISOString(),players:players}).split(LT).join('\\u003c');
-    var tpl=$('tpl').textContent.split(LT+BS+SL).join(LT+SL);
-    var tplEsc=tpl.split(LT+SL).join(LT+BS+SL);
-    var html=tpl.split(seedTok).join(seed).split(tplTok).join(tplEsc);
-    return art.publish(html);
-  }
-  function initOwner(){
+  // Mode administrateur (adresse de la page suivie de ?admin) : sert à fabriquer le fichier compos.json
+  function initAdmin(){
     $('add').hidden=false;
-    $('add').open=!players.length;
+    $('add').open=true;
     $('go').onclick=function(){
       var t=$('txt').value.trim();
       if(!t){setMsg('Colle d\'abord une composition.',true);return}
       var r=parse(t,$('club').value);
       if(r.error){setMsg(r.error,true);return}
       addPlayers(r.list);
-      setMsg(r.list.length+' joueurs ajoutés ('+r.teams.join(' et ')+'). Touche « Publier pour le groupe » quand tu as fini.');
+      setMsg(r.list.length+' joueurs ajoutés ('+r.teams.join(' et ')+'). Copie le fichier ci-dessous dans compos.json sur GitHub.');
       $('txt').value=''; $('club').value='';
       render();
     };
     $('clear').onclick=function(){
       if(!players.length){setMsg('Rien à effacer.');return}
-      players=[]; markDirty(); setMsg('Compositions effacées. Publie pour que le groupe voie le changement.'); render();
+      players=[]; refreshOut(); setMsg('Compositions effacées.'); render();
     };
-    $('pub').onclick=async function(){
-      var b=$('pub'); b.disabled=true; b.textContent='Publication…';
-      try{ await publishAll(); }
-      catch(e){
-        b.disabled=false; b.textContent='Publier pour le groupe';
-        var c=e&&e.code;
-        $('add').open=true;
-        if(c==='conflict') setMsg('Une autre version vient d\'être publiée, la page se recharge.',true);
-        else if(c==='not_writer'||c==='not_granted'||c==='not_declared'||c==='capability_disabled'||c==='consent_required') setMsg('La publication n\'est pas possible depuis cette vue. Envoie les compositions à Claude dans la conversation pour qu\'il publie la mise à jour.',true);
-        else if(c==='rate_limited') setMsg('Trop de publications d\'affilée, attends un instant.',true);
-        else setMsg('La publication a échoué, réessaie dans un instant.',true);
-      }
+    $('copy').onclick=function(){
+      var ta=$('jsonout'), done=function(){setMsg('Copié. Colle-le maintenant dans compos.json sur GitHub.')};
+      ta.focus(); ta.select();
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(ta.value).then(done,function(){try{document.execCommand('copy');done()}catch(e){setMsg('Copie impossible : sélectionne le texte et copie-le à la main.',true)}});
+      } else { try{document.execCommand('copy');done()}catch(e){setMsg('Copie impossible : sélectionne le texte et copie-le à la main.',true)} }
     };
+    refreshOut();
   }
 
   ['q','onlyFav'].forEach(function(id){
@@ -751,19 +361,12 @@ li.p.sub .num{color:var(--muted)}
   $('onlyStart').addEventListener('change',function(){if(this.checked)$('onlySub').checked=false;renderResults()});
   $('onlySub').addEventListener('change',function(){if(this.checked)$('onlyStart').checked=false;renderResults()});
 
-  readSeed();
-  render();
-
-  // Seule la personne qui peut modifier la page voit l'ajout de compos
-  (async function(){
-    try{
-      if(typeof claude==='undefined'||!claude.use) return;
-      var user=await claude.use('user');
-      var can=user?await user.canEdit():false;
-      var art=can?await claude.use('artifact'):null;
-      if(can&&art){canWrite=true; initOwner(); render();}
-    }catch(e){}
-  })();
+  loadFavs();
+  fetch('compos.json?v='+Date.now(),{cache:'no-store'})
+    .then(function(r){if(!r.ok) throw new Error('http'); return r.json()})
+    .then(function(d){players=(d&&d.players)||[]; updated=(d&&d.updated)||null;})
+    .catch(function(){loadError=true})
+    .then(function(){ if(isAdmin) initAdmin(); render(); });
 })();
 </script>
 </body>
